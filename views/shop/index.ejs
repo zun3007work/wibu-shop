@@ -1,0 +1,90 @@
+<%- include ('../includes/head.ejs') %>
+
+<body>
+  <%- include ('../includes/nav.ejs') %>
+
+  <main>
+    <div class="container p-5 mt-5 shadow-lg rounded-5">
+      <% if(products.length > 0) { %>
+
+      <h1 class="text-center">My Product</h1>
+      <!-- List of Product -->
+      <div class="row mt-5">
+        <% products.forEach( (product) => { %>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <div class="card rounded-5">
+            <img src="/<%= product.imgUrl %>" alt="hutao image" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title mb-3 text-center"><%= product.title %></h4>
+              <p class="card-text text-center mb-3">
+                <%= product.description %>
+              </p>
+              <div class="row g-1">
+                <div class="col-5">
+                  <button class="btn fw-bold btn-outline-dark rounded-3 w-100">
+                    $<%= product.price %>
+                  </button>
+                </div>
+                <div class="col-7">
+                  <%- include ('../includes/add-to-cart.ejs', {product: product}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <nav>
+        <ul class="pagination mt-3 justify-content-center">
+          <li class="page-item">
+            <a class="page-link <%= (currentPage === 1) ? 'disabled' : '' %>" href="/?page=<%= currentPage - 1 %>" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <% if(!shortForm) { %>
+          <% for(let i = 1;i <= pageAmount;i++) { %>
+          <li class="page-item">
+            <a class="page-link <%= (i === currentPage) ? 'active' : '' %>" href="/?page=<%= i %>"><%= i %></a>
+          </li>
+          <% } %>
+          <% } else { %>
+          <% if(pageEnd === pageAmount) { %>
+          <li class="page-item">
+            <a class="page-link" href="/?page=1">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link disabled" href="#">...</a>
+          </li>
+          <% for(let i = pageStart;i <= pageEnd;i++) { %>
+          <li class="page-item">
+            <a class="page-link <%= (i === currentPage) ? 'active' : '' %>" href="/?page=<%= i %>"><%= i %></a>
+          </li>
+          <% } %>
+          <% } else { %>
+          <% for(let i = pageStart;i <= pageEnd;i++) { %>
+          <li class="page-item">
+            <a class="page-link <%= (i === currentPage) ? 'active' : '' %>" href="/?page=<%= i %>"><%= i %></a>
+          </li>
+          <% } %>
+          <li class="page-item">
+            <a class="page-link disabled" href="#">...</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="/?page=<%= pageAmount %>"><%= pageAmount %></a>
+          </li>
+          <% } %>
+          <% } %>
+          <li class="page-item">
+            <a class="page-link <%= (currentPage === pageAmount) ? 'disabled' : '' %>" href="/?page=<%= currentPage + 1 %>" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <% } else { %>
+      <h1 class="text-center">You Don't Have Any Product Yet</h1>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include ('../includes/end.ejs') %>

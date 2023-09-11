@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+  <body>
+    <%- include ('../includes/nav.ejs') %>
+
+    <main>
+      <div
+        class="container p-5 mt-5 shadow-lg border-0 rounded-5"
+        style="max-width: 800px"
+      >
+        <h1 class="text-center">Add Product</h1>
+        <% if(errorMessage) { %>
+          <div class="text-center alert alert-danger mt-5" role="alert"><%= errorMessage %></div>
+        <% } %>
+        <!-- Form -->
+        <form class="mt-4 px-4" action="/admin/add-product" method="post" enctype="multipart/form-data">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              id="floatingTitle"
+              placeholder="Your Title"
+              value="<%= oldInput.title %>"
+            />
+            <label for="floatingTitle">Title</label>
+          </div>
+          <div class="mb-3">
+            <label for="formFile">Image</label>
+            <input type="file" class="form-control" id="formFile" name="image"/>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" step="0.01" class="form-control" id="floatingPrice" placeholder="Enter Book's Price" name="price" value="<%= oldInput.price %>"/>
+            <label for="floatingPrice">Price</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" name="description" id="floatingDesc" placeholder="Enter Book's Description" style="height: 10rem;"><%= oldInput.description %></textarea>
+            <label for="floatingDesc">Description</label>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-outline-dark px-5 py-2">Add Product</button>
+          </div>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+      </div>
+    </main>
+<%- include ('../includes/end.ejs') %>

@@ -1,0 +1,35 @@
+<%- include ('../includes/head.ejs') %>
+
+<body>
+  <%- include ('../includes/nav.ejs') %>
+  <main>
+    <div class="container p-5 pb-4 mt-5 shadow-lg rounded-5" style="max-width: 800px">
+      <% if(orders?.length> 0){ %>
+      <% orders.forEach(order => { %>
+      <div class="container shadow-lg p-5 text-bg-ligh rounded-1 mb-3">
+        <h3 class="mb-5">Order #<%= order._id %></h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.items.forEach(item => { %>
+            <tr>
+              <td><%= item.product.title %></td>
+              <td><%= item.quantity %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <div class="text-end"><a href="/invoices/<%= order._id %>" class="btn btn-dark mt-3">Download PDF</a></div>
+      </div>
+      <% }) %>
+      <% } else { %>
+      <h1 class="text-center">You don't have any order yet!</h1>
+      <% } %>
+    </div>
+  </main>
+  <%- include ('../includes/end.ejs') %>

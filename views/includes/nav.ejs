@@ -1,0 +1,47 @@
+<!-- Navbar -->
+<header class="sticky-top">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+    <div class="container-fluid">
+      <button class="ms-auto btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNav">
+        <ul class="navbar-nav mx-auto fs-5 text-center">
+          <li class="nav-item">
+            <a href="/" class="nav-link <%= page === '/' ? 'active' : '' %>">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a href="/products" class="nav-link <%= page === '/products' ? 'active' : '' %>">Products</a>
+          </li>
+          <% if(isAuthenticated) { %>
+          <li class="nav-item">
+            <a href="/cart" class="nav-link <%= page === '/cart' ? 'active' : '' %>">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a href="/order" class="nav-link <%= page === '/order' ? 'active' : '' %>">Order</a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/add-product" class="nav-link <%= page === '/admin/add-product' ? 'active' : '' %>">Add Product</a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/products" class="nav-link <%= page === '/admin/products' ? 'active' : '' %>">Admin Products</a>
+          </li>
+          <% } %>
+        </ul>
+        <% if(isAuthenticated) { %>
+        <div class="text-end">
+          <form action="/logout" method="post">
+            <button type="submit" class="btn btn-light me-5 rounded-5 px-3 fs-5">Logout</button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          </form>
+        </div>
+        <% } else { %>
+          <div class="text-end">
+            <a href="/login" class="btn btn-light rounded-5 px-3 fs-5">Login</a>
+            <a href="/signup" class="btn btn-light me-5 rounded-5 px-3 fs-5">Sign Up</a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+</header>

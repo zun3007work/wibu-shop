@@ -1,0 +1,37 @@
+{
+  "name": "section-3",
+  "version": "1.0.0",
+  "description": "NodeJS The Complete Guide",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Zun and Mr.Max",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "csrf-csrf": "^2.3.0",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
+    "multer": "^1.4.4",
+    "mysql2": "^3.5.2",
+    "nodemailer": "^6.9.4",
+    "pdfkit": "^0.13.0",
+    "sequelize": "^6.32.1",
+    "stripe": "^12.17.0",
+    "tiny-csrf": "^1.1.3"
+  }
+}

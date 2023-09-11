@@ -1,0 +1,53 @@
+<%- include ('../includes/head.ejs') %>
+
+<body>
+  <%- include ('../includes/nav.ejs') %>
+  <main>
+    <div class="container p-5 mt-5 shadow-lg rounded-5">
+      <% if(products?.length > 0) { %>
+      <h1 class="text-center mb-5">Your Cart</h1>
+      <% for(let i=0;i < products.length; i++) { %>
+      <div class="mb-3 container p-3 pt-4 shadow-lg rounded-1">
+        <div class="row">
+          <div class="col-2">
+            <p class="text-center">
+              <%= i + 1 %>
+            </p>
+          </div>
+          <div class="col-6">
+            <p>
+              <%= products[i].productId.title %>
+            </p>
+          </div>
+          <div class="col-2">
+            <p class="text-center">
+              <%= products[i].quantity %>
+            </p>
+          </div>
+          <div class="col-2">
+            <form action="/cart/delete" method="post">
+              <button type="submit" class="btn btn-dark delete">
+                Delete
+              </button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" value="<%= products[i].productId._id %>" name="prodId">
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="text-center mt-3">
+        <!-- <form action="/order" method="post">
+          <button type="submit" class="px-5 py-2 btn btn-dark">Order</button>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form> -->
+        <a href="/checkout" class="px-5 py-2 btn btn-dark">Order</a>
+      </div>
+      <% } else { %>
+      <h1 class="text-center">You don't have any item in your cart</h1>
+      <% } %>
+    </div>
+    </div>
+  </main>
+  <%- include ('../includes/end.ejs') %>
